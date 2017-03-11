@@ -33,3 +33,5 @@ CycleJS -> Proxies
   ```
 
 CycleJS is essentially a loop of read/write effects
+
+[Model/View/Intent](https://cycle.js.org/model-view-intent.html)
