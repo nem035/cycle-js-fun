@@ -2,30 +2,34 @@
 
 Messing around with [CycleJS](https://cycle.js.org/).
 
-Notes:
+[Live Page](https://github.com/nem035/cycle-js-fun)
 
-1. Principle: Separate Logic from Drivers (effects).
+## Notes:
+
+Principle: Separate Logic from Drivers (effects).
 
 Logic is functional
 Drivers are imperative
 
 Developer writes the logic, framework drives the effects.
 
-2. Source : input (read) effects
-   Sink   : output (write) effects
+Sources : input (read) effects
+Sinks   : output (write) effects
 
-3. CycleJS -> Proxies
+CycleJS -> Proxies
 
-    How to do?
+  How to do?
 
-      a = f(b)
-      b = g(a)
+  ```js
+    a = f(b)
+    b = g(a)
 
-    With proxies:
+  // With proxies:
 
-      bProxy = ...
-      a = f(bProxy)
-      b = g(a)
-      bProxy.imitate(b)
+    bProxy = ...
+    a = f(bProxy)
+    b = g(a)
+    bProxy.imitate(b)
+  ```
 
-CycleJS is really a loop of read/write effects
+CycleJS is essentially a loop of read/write effects
