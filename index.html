@@ -4,24 +4,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>CycleJS</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.0.6/rx.all.js"></script>
-  <script src="https://rawgit.com/cyclejs/cycle-core/v6.0.0/dist/cycle.js"></script>
-  <script src="https://rawgit.com/cyclejs/cycle-dom/v9.0.1/dist/cycle-dom.js"></script>
-  <script src="https://rawgit.com/cyclejs/cycle-http-driver/v7.0.0/dist/cycle-http-driver.js"></script>
-  <script src="https://rawgit.com/cyclejs/isolate/v1.1.1/dist/cycle-isolate.js"></script>
+  <title>CycleJSFun</title>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css">
   <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  src="//code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/rxjs/4.0.6/rx.all.js"></script>
+  <script src="//rawgit.com/cyclejs/cycle-core/v6.0.0/dist/cycle.js"></script>
+  <script src="//rawgit.com/cyclejs/cycle-dom/v9.0.1/dist/cycle-dom.js"></script>
+  <script src="//rawgit.com/cyclejs/cycle-http-driver/v7.0.0/dist/cycle-http-driver.js"></script>
+  <script src="//rawgit.com/cyclejs/isolate/v1.1.1/dist/cycle-isolate.js"></script>
 </head>
 
 <style>
   :root {
     font-size: 16px;
-  }
-
-  body {
   }
 
   body.loading {
@@ -30,15 +29,19 @@
   }
 
   #menu {
-    margin: 20px;
+    align-items: center;
+    display: flex;
     font-size: 1.5em;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
   }
 
   #menu li {
-    display: inline;
-    color: teal;
-    padding: 20px;
     box-shadow: 0 1px 2px #ddd;
+    color: teal;
+    display: inline;
+    padding: 20px;
   }
 
   #menu li:hover {
@@ -52,15 +55,29 @@
     color: #fff;
   }
 
+  #content {
+    background: #fff;
+    display: flex;
+    height: 85vh;
+    margin-top: 5px;
+  }
+
+  #app, #code {
+    height: 100%;
+	  width: 50%;
+  }
+
   #app {
     align-items: center;
+	  justify-content: center;
     background: #fff;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    height: 85vh;
-    justify-content: center;
-    margin-top: 25px;
+  }
+
+  #code {
+    font-size: .8em;
+    overflow: scroll;
   }
 </style>
 
@@ -73,7 +90,14 @@
     <li><a data-name="slider_component">Slider Component</a></li>
     <li><a data-name="bmi_using_slider_component">BMI & Slider Component</a></li>
   </ul>
-  <div id="app">
+  <div id="content">
+    <div id="app">
+    </div>
+    <div id="code">
+      <pre>
+        <code class="js"></code>
+      </pre>
+    </div>
   </div>
 </body>
 
@@ -87,7 +111,14 @@
 
       $('body').addClass('loading')
       $.getScript(`./${$el.find('a').data('name')}.js`)
-        .done(() => {
+        .done((code) => {
+          const codeLines = code.split('\n')
+          const skipTopAndBottom = codeLines.slice(1, codeLines.length - 2)
+          const $codeBlock = $('code.js').html(
+            skipTopAndBottom.join('\n')
+          )
+          $('#code pre').html($codeBlock)
+          hljs.highlightBlock($codeBlock.get(0));
           script('#app', {Cycle, CycleDOM, Rx, CycleHTTPDriver, CycleIsolate})
         })
         .always(() => {
