@@ -2,7 +2,7 @@
 
 Messing around with [CycleJS](https://cycle.js.org/).
 
-[Live Page](https://github.com/nem035/cycle-js-fun)
+[Live Page](https://nem035.github.io/cycle-js-fun/)
 
 ## Notes:
 
