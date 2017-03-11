@@ -9,6 +9,7 @@
   <script src="https://rawgit.com/cyclejs/cycle-core/v6.0.0/dist/cycle.js"></script>
   <script src="https://rawgit.com/cyclejs/cycle-dom/v9.0.1/dist/cycle-dom.js"></script>
   <script src="https://rawgit.com/cyclejs/cycle-http-driver/v7.0.0/dist/cycle-http-driver.js"></script>
+  <script src="https://rawgit.com/cyclejs/isolate/v1.1.1/dist/cycle-isolate.js"></script>
   <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -70,6 +71,7 @@
     <li><a data-name="http">HTTP</a></li>
     <li><a data-name="bmi">BMI</a></li>
     <li><a data-name="slider_component">Slider Component</a></li>
+    <li><a data-name="bmi_using_slider_component">BMI & Slider Component</a></li>
   </ul>
   <div id="app">
   </div>
@@ -86,7 +88,7 @@
       $('body').addClass('loading')
       $.getScript(`./${$el.find('a').data('name')}.js`)
         .done(() => {
-          script('#app', {Cycle, CycleDOM, Rx, CycleHTTPDriver})
+          script('#app', {Cycle, CycleDOM, Rx, CycleHTTPDriver, CycleIsolate})
         })
         .always(() => {
           $('body').removeClass('loading')
